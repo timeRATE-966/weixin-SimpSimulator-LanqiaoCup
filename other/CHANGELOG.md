@@ -5,7 +5,24 @@
 
 ---
 
-## v1.3（最终参赛版 / Final Competition Version）→ `../chat.html`
+## v1.4 → `chat1.4.html` / `../chat.html`
+
+**修复 / Fixed**
+- 移除静态 HTML 中的 `time-before`（昨天 12:15）时间标签，彻底解决 GitHub Pages 上两个时间标签同时出现的视觉重复问题  
+  Removed static `time-before` ("昨天 12:15") div to fix duplicate timestamp display on GitHub Pages
+- `time-item` 从静态 HTML 移除，改为首次发送消息时由 JS 动态插入，显示当前实际时间（HH:mm）  
+  `time-item` removed from static HTML; now injected dynamically on first send with real-time HH:mm
+- 图片路径规范化：`warning mark.png`（含空格）→ `warning-mark.png`，避免 URL 路径解析异常  
+  Image path normalized: `warning mark.png` (with space) → `warning-mark.png` to avoid URL parsing issues
+- 新增 GitHub Pages 托管支持（`index.html` 重定向入口）  
+  Added GitHub Pages support via `index.html` redirect entry
+
+**所有改动处附带 `[FIX 2026-03-14]` 时间戳注释（中英双语）**  
+All changes annotated with `[FIX 2026-03-14]` timestamp comments (bilingual)
+
+---
+
+## v1.3（最终参赛版 / Final Competition Version）→ `chat1.3.html`
 
 **新增 / Added**
 - 两段时间戳同时动态更新（当前时间 & 当前时间 −20 min）  

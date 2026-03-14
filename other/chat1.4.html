@@ -1,0 +1,319 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>舔狗模拟器 · SimpSimulator</title>
+</head>
+<body>
+    <div class="main">
+        <!-- 头部 / Header -->
+        <div class="head">
+            <a class="text__head" href="#">女神小美(3.27)</a>
+        </div>
+
+        <!-- 消息列表 / Message List -->
+        <div class="container">
+            <div class="content">
+                <!-- [FIX 2026-03-14] 移除静态 time-before（昨天 12:15），时间标签改为发送消息时由 JS 动态插入。
+                     [FIX 2026-03-14] Removed static time-before div; time label now injected by JS on first send. -->
+                <div class="item item-center"><span>我拍了拍"女神小美(3.27)"的头说你是笨狗</span></div>
+                <div class="item item-right"><div class="chat__img bubble-right"><img class="chat__img1" src="./images/img1.png" alt=""></div><div class="avatar"><img src="./images/head2.jpg" /></div></div>
+                <div class="item item-right"><div class="bubble bubble-right">要不要一起打王者</div><div class="avatar"><img src="./images/head2.jpg" /></div></div>
+                <div class="item item-left"><div class="avatar"><img src="./images/head1.png" /></div><div class="bubble bubble-left">不玩，内存不够</div></div>
+                <div class="item item-right"><div class="bubble bubble-right">那你可以删一些没用的东西呀</div><div class="avatar"><img src="./images/head2.jpg" /></div></div>
+                <div class="item item-right"><div class="chat__img bubble-right "><img src="./images/img2.jpg" alt="" class="chat__img2"></div><div class="avatar"><img src="./images/head2.jpg" /></div></div>
+                <div class="item item-left"><div class="avatar"><img src="./images/head1.png" /></div><div class="bubble bubble-left">好</div></div>
+            </div>
+        </div>
+
+        <!-- 输入框 / Input Area -->
+        <div class="inp__bottom">
+            <input value="删好了叫我" type="text" onkeydown="if(event.key === 'Enter') send(event)" placeholder="请输入内容">
+            <button onclick="send(event)">发送</button>
+        </div>
+    </div>
+
+    <style>
+body {
+    background-color: #d2dce4;
+    margin: 0;
+    padding: 0;
+    font-family: Arial, sans-serif;
+    overflow: hidden;
+}
+
+.main {
+    margin: auto;
+    background-color: #ffffff;
+    width: 400px;
+    height: 600px;
+    border-radius: 10px;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+.head {
+    height: 50px;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    padding: 0 20px;
+    font-size: 18px;
+    font-weight: bold;
+    background-color: #ededed;
+}
+
+.text__head {
+    color: black;
+    text-decoration: none;
+}
+
+/* 主体 / Main body */
+.container {
+    height: calc(100% - 110px);  /* 600px - 50px (head) - 60px (input) */
+    width: 100%;
+    border-radius: 4px;
+    border: 0.5px solid #e0e0e0;
+    background-color: #f5f5f5;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    background-image: url(https://pic1.zhimg.com/v2-9a3f72e316c94954a4005c11fe3f5e80_r.jpg?source=1940ef5c);
+}
+
+.content {
+    width: 100%;
+    padding: 15px;
+    overflow-y: scroll;
+    flex: 1;
+}
+
+.content:hover::-webkit-scrollbar-thumb {
+    background: rgba(0, 0, 0, 0.1);
+}
+
+/* 气泡样式 / Bubble styles */
+.bubble {
+    max-width: 65%;
+    padding: 10px;
+    border-radius: 5px;
+    position: relative;
+    color: #000;
+    word-wrap: break-word;
+    word-break: normal;
+}
+
+.chat__img {
+    max-width: 65%;
+    padding-right: 15px;
+    border-radius: 5px;
+    position: relative;
+}
+
+.chat__img2 {
+    height: 100px;
+    width: 100%;
+}
+
+.chat__img3 {
+    height: 100px !important;
+    width: 100px !important;
+    padding-right: 15px;
+    border-radius: 5px;
+}
+
+.item-left .bubble {
+    margin-left: 15px;
+    background-color: #fff;
+}
+
+.item-left .bubble:before {
+    content: "";
+    position: absolute;
+    width: 0;
+    height: 0;
+    border-left: 10px solid transparent;
+    border-top: 10px solid transparent;
+    border-right: 10px solid #fff;
+    border-bottom: 10px solid transparent;
+    left: -15px;
+}
+
+.item-right .bubble {
+    margin-right: 15px;
+    background-color: #9eea6a;
+}
+
+.item-right .bubble:before {
+    content: "";
+    position: absolute;
+    width: 0;
+    height: 0;
+    border-left: 10px solid #9eea6a;
+    border-top: 10px solid transparent;
+    border-right: 10px solid transparent;
+    border-bottom: 10px solid transparent;
+    right: -15px;
+}
+
+.item {
+    margin-top: 10px;
+    display: flex;
+    width: 100%;
+}
+
+.item.item-right {
+    justify-content: flex-end;
+}
+
+.item-right .avatar {
+    margin-right: 15px;
+}
+
+/* 红色感叹号 / Warning icon (blocked indicator) */
+.warning {
+    display: inline-block;
+    vertical-align: middle;
+}
+
+.warning img {
+    width: 20px;
+    height: 20px;
+    position: relative;
+    top: 50%;
+    transform: translateY(-50%);
+    margin-right: 5px;
+}
+
+.item.item-center {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    max-width: 80%;
+    width: 100%;
+    margin: 0 auto;
+    flex-direction: column;
+}
+
+.item.item-center span {
+    font-size: 12px;
+    padding: 2px 4px;
+    color: black;
+    background-color: #dadada;
+    border-radius: 3px;
+    user-select: none;
+    margin: 5px 0;
+}
+
+.avatar img {
+    width: 35px;
+    height: 35px;
+    border-radius: 5px;
+}
+
+.SendFriendVerification a {
+    text-decoration: none;
+}
+
+.inp__bottom {
+    height: 60px;
+    display: flex;
+    align-items: center;
+    padding: 0 10px;
+    background-color: #f7f7f7;
+}
+
+.inp__bottom input {
+    flex: 1;
+    height: 35px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    padding: 0 10px;
+    outline: none;
+}
+
+.inp__bottom button {
+    margin-left: 10px;
+    padding: 0 15px;
+    height: 35px;
+    background-color: #07c160;
+    color: #ffffff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+    </style>
+
+    <script>
+        // 首次发送标志 / First-send flag
+        let flag = 0;
+
+        // [FIX 2026-03-14] time-before 已从静态 HTML 移除，time-item 改为首次发送时动态插入，
+        // 显示当前时间（HH:mm），页面加载时不显示任何时间标签。
+        // [FIX 2026-03-14] time-before removed from HTML; time-item now injected on first send
+        // showing current HH:mm. No timestamp is shown on initial page load.
+
+        // 获取输入框 / Get input element
+        const input = document.querySelector(".inp__bottom input");
+        input.focus();
+
+        // 发送消息函数 / Send message function
+        function send(event) {
+            event.preventDefault();
+
+            const content = input.value.trim();
+            if (!content) {
+                alert("请输入内容 / Please enter a message");
+                return;
+            }
+
+            // 首次发送：先插入当前时间标签，再插入消息气泡
+            // First send: inject current-time label before the message bubble
+            if (flag === 0) {
+                const now = new Date();
+                const hours = String(now.getHours()).padStart(2, '0');
+                const minutes = String(now.getMinutes()).padStart(2, '0');
+                let timeItem = document.createElement('div');
+                timeItem.className = 'item item-center';
+                timeItem.id = 'time-item';
+                timeItem.innerHTML = `<span>${hours}:${minutes}</span>`;
+                document.querySelector('.content').appendChild(timeItem);
+            }
+
+            // 创建带红色感叹号的消息气泡（被拉黑效果）
+            // Create message bubble with red warning icon (blocked effect)
+            let item = document.createElement('div');
+            item.className = 'item item-right';
+            item.innerHTML = `<div class="warning"><img src="./images/warning-mark.png" /></div> <div class="bubble bubble-right">${content}</div><div class="avatar"><img src="./images/head2.jpg" /></div>`;
+            document.querySelector('.content').appendChild(item);
+
+            // 首次发送：触发好友验证提示 + 延迟显示回应图片
+            // First send: show friend-verification notice + delayed reply image
+            if (flag === 0) {
+                let WarningPart = document.createElement('div');
+                WarningPart.className = 'WarningPart';
+                WarningPart.innerHTML = `<div class="item item-center SendFriendVerification"><span id="Warning__block">川. 开启了朋友验证，你还不是他（她）的朋友。请先发送朋友验证请求，对方验证通过后才能聊天。<a href="" class="SendFriendVerification__a">发送朋友验证</a></span></div>`;
+                document.querySelector('.content').appendChild(WarningPart);
+
+                setTimeout(() => {
+                    let content3 = document.createElement('div');
+                    content3.className = 'item item-right';
+                    // [FIX 2026-03-14] 同上，warning mark.png → warning-mark.png / Same rename as above
+                    content3.innerHTML = `<div class="warning"><img src="./images/warning-mark.png" /></div> <div class="warning"><img class="chat__img3" src="./images/img3.png" /></div> <div class="avatar"><img src="./images/head2.jpg" /></div>`;
+                    document.querySelector('.content').appendChild(content3);
+                    document.querySelector(".content").scrollTop = document.querySelector('.content').scrollHeight;
+                }, 1750);
+
+                flag = 1;
+            }
+
+            // 清空输入框，滚动到底部 / Clear input and scroll to bottom
+            input.value = "";
+            document.querySelector(".content").scrollTop = document.querySelector('.content').scrollHeight;
+        }
+    </script>
+</body>
+</html>

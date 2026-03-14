@@ -40,8 +40,8 @@ You play the simp, sending messages to your crush "Goddess Xiaomei" — but ever
 
 - 🖼️ **仿微信 UI**：气泡样式、头像圆角、聊天背景图，高度还原微信风格  
   WeChat-style chat UI with authentic bubbles, rounded avatars, and background
-- ⏰ **动态时间戳**：页面加载时自动更新为当前时间（两段时间节点）  
-  Dynamic timestamps auto-updated to real current time on load
+- ⏰ **动态时间戳**：首次发送消息时自动插入当前时间标签（HH:mm）  
+  Dynamic timestamp injected on first send with real current time (HH:mm)
 - 💬 **预置剧情对话**：拍了拍、图片消息、文字气泡，有完整叙事  
   Pre-set narrative: pat action, image messages, text bubbles with a full storyline
 - ⚠️ **首次发送触发好友验证提示**，并在 1.75 秒后延迟出现表情回应  
@@ -94,7 +94,7 @@ node server.js
 ```
 weixin-SimpSimulator-LanqiaoCup/
 ├── index.html                   # 🔀 GitHub Pages 入口（重定向至 chat.html）/ Pages entry redirect
-├── chat.html                    # 🌟 主界面（v1.3 最终版）/ Main page (v1.3 final)
+├── chat.html                    # 🌟 主界面（v1.4 最新版）/ Main page (v1.4 latest)
 ├── server.js                    # Express 静态文件服务器 / Express static server
 ├── package.json                 # 项目依赖 / Project dependencies
 ├── (双击启动)舔狗模拟器.bat      # Windows 一键启动 / Windows one-click launcher
@@ -111,7 +111,8 @@ weixin-SimpSimulator-LanqiaoCup/
     ├── CHANGELOG.md             # 版本迭代记录 / Full version history
     ├── chat1.html               # v1.1 历史版本 / v1.1
     ├── chat1.2.html             # v1.2 历史版本 / v1.2
-    ├── chat1.3.html             # v1.3 草稿归档 / v1.3 archived draft
+    ├── chat1.3.html             # v1.3 历史版本 / v1.3
+    ├── chat1.4.html             # v1.4 历史快照 / v1.4 snapshot
     └── ...                      # 其他开发草稿 / Other dev drafts
 ```
 
@@ -134,7 +135,8 @@ weixin-SimpSimulator-LanqiaoCup/
 
 | 版本 | 主要变更 |
 |:---:|:---|
-| **v1.3** ✅ | 双时间戳动态更新、预填输入框、首次发送延迟优化至 1.75s |
+| **v1.4** ✅ | 修复 GitHub Pages 双时间戳重复问题；`time-item` 改为首次发送时动态插入；图片路径规范化；新增 GitHub Pages 支持 |
+| v1.3 | 双时间戳动态更新、预填输入框、首次发送延迟优化至 1.75s |
 | v1.2 | 完整预置对话、沸羊羊/美羊羊头像、被拉黑红色感叹号效果 |
 | v1.1 | 消息列表内嵌预置内容 |
 | v1.0 | 基础聊天 UI，纯动态消息，`prompt()` 获取用户名 |
