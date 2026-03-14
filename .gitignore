@@ -1,0 +1,29 @@
+# Node.js dependencies
+node_modules/
+
+# npm lock (keep package-lock.json, ignore yarn.lock if any)
+yarn.lock
+
+# Editor & IDE
+.vscode/
+*.code-workspace
+.idea/
+
+# OS generated files
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Baidu cloud upload temp files
+*.baiduyun.uploading.cfg
+
+# Windows Registry backup (contains sensitive system info)
+*.reg
+
+# Logs
+*.log
+npm-debug.log*
+
+# Local env files
+.env
+.env.local

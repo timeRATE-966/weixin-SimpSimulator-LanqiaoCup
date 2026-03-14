@@ -1,38 +1,36 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="zh-CN">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Chat Interface</title>
+    <title>舔狗模拟器 · SimpSimulator</title>
 </head>
 <body>
     <div class="main">
-        <!-- 头部 -->
+        <!-- 头部 / Header -->
         <div class="head">
             <a class="text__head" href="#">女神小美(3.27)</a>
         </div>
 
-        <!-- 消息列表 -->
+        <!-- 消息列表 / Message List -->
         <div class="container">
             <div class="content">
-                <!-- <div class="item item-center" id="time-before"><span>昨天 12:15</span></div> -->
+                <div class="item item-center" id="time-before"><span>昨天 12:15</span></div>
 
                 <div class="item item-center" id="time-item"><span>昨天 12:35</span></div>
-                <div class="item item-center"><span>我拍了拍“女神小美(3.27)”的头说你是笨狗</span></div>
+                <div class="item item-center"><span>我拍了拍"女神小美(3.27)"的头说你是笨狗</span></div>
                 <div class="item item-right"><div class="chat__img bubble-right"><img class="chat__img1" src="./images/img1.png" alt=""></div><div class="avatar"><img src="./images/head2.jpg" /></div></div>
                 <div class="item item-right"><div class="bubble bubble-right">要不要一起打王者</div><div class="avatar"><img src="./images/head2.jpg" /></div></div>
                 <div class="item item-left"><div class="avatar"><img src="./images/head1.png" /></div><div class="bubble bubble-left">不玩，内存不够</div></div>
                 <div class="item item-right"><div class="bubble bubble-right">那你可以删一些没用的东西呀</div><div class="avatar"><img src="./images/head2.jpg" /></div></div>
                 <div class="item item-right"><div class="chat__img bubble-right "><img src="./images/img2.jpg" alt="" class="chat__img2"></div><div class="avatar"><img src="./images/head2.jpg" /></div></div>
                 <div class="item item-left"><div class="avatar"><img src="./images/head1.png" /></div><div class="bubble bubble-left">好</div></div>
-
-            
             </div>
         </div>
 
-        <!-- 输入框 -->
+        <!-- 输入框 / Input Area -->
         <div class="inp__bottom">
-            <input value="" type="text" onkeydown="if(event.key === 'Enter') send(event)" placeholder="">
+            <input value="删好了叫我" type="text" onkeydown="if(event.key === 'Enter') send(event)" placeholder="请输入内容">
             <button onclick="send(event)">发送</button>
         </div>
     </div>
@@ -61,25 +59,22 @@ body {
 .head {
     height: 50px;
     width: 100%;
-    /* border-bottom: 3px solid #eff1f1; */
     display: flex;
     align-items: center;
     padding: 0 20px;
     font-size: 18px;
     font-weight: bold;
     background-color: #ededed;
-    /* justify-content: center; */
 }
 
 .text__head {
     color: black;
     text-decoration: none;
-    
 }
 
-/* 主体 */
+/* 主体 / Main body */
 .container {
-    height: calc(100% - 110px);  /* 600px - 50px (头部) - 60px (输入框) */
+    height: calc(100% - 110px);  /* 600px - 50px (head) - 60px (input) */
     width: 100%;
     border-radius: 4px;
     border: 0.5px solid #e0e0e0;
@@ -92,7 +87,7 @@ body {
 
 .content {
     width: 100%;
-    padding: 15px;  /* 减少内边距以适应容器 */
+    padding: 15px;
     overflow-y: scroll;
     flex: 1;
 }
@@ -101,9 +96,9 @@ body {
     background: rgba(0, 0, 0, 0.1);
 }
 
-/* 气泡样式 */
+/* 气泡样式 / Bubble styles */
 .bubble {
-    max-width: 65%;  /* 修改最大宽度 */
+    max-width: 65%;
     padding: 10px;
     border-radius: 5px;
     position: relative;
@@ -111,8 +106,9 @@ body {
     word-wrap: break-word;
     word-break: normal;
 }
+
 .chat__img {
-    max-width: 65%;  /* 修改最大宽度 */
+    max-width: 65%;
     padding-right: 15px;
     border-radius: 5px;
     position: relative;
@@ -123,15 +119,12 @@ body {
     width: 100%;
 }
 
-
 .chat__img3 {
     height: 100px !important;
     width: 100px !important;
-    /* max-width: 65%;  修改最大宽度 */
     padding-right: 15px;
     border-radius: 5px;
 }
-
 
 .item-left .bubble {
     margin-left: 15px;
@@ -147,7 +140,7 @@ body {
     border-top: 10px solid transparent;
     border-right: 10px solid #fff;
     border-bottom: 10px solid transparent;
-    left: -15px;  /* 调整位置 */
+    left: -15px;
 }
 
 .item-right .bubble {
@@ -164,23 +157,24 @@ body {
     border-top: 10px solid transparent;
     border-right: 10px solid transparent;
     border-bottom: 10px solid transparent;
-    right: -15px;  /* 调整位置 */
+    right: -15px;
 }
 
 .item {
-    margin-top: 10px;  /* 减小间距 */
+    margin-top: 10px;
     display: flex;
     width: 100%;
 }
 
 .item.item-right {
     justify-content: flex-end;
-    
 }
 
 .item-right .avatar {
-    margin-right: 15px;  /* 添加右间距 */
+    margin-right: 15px;
 }
+
+/* 红色感叹号 / Warning icon (blocked indicator) */
 .warning {
     display: inline-block;
     vertical-align: middle;
@@ -192,17 +186,17 @@ body {
     position: relative;
     top: 50%;
     transform: translateY(-50%);
-    margin-right: 5px; /* 可选：添加一些右边距 */
+    margin-right: 5px;
 }
 
 .item.item-center {
     display: flex;
-    justify-content: center;  /* 水平居中 */
-    align-items: center;      /* 垂直居中 */
-    max-width: 80%;  /* 修改最大宽度 */
-    width: 100%;     /* 确保占满父容器宽度 */
-    margin: 0 auto;  /* 水平居中 */
-    flex-direction: column;  /* 使子元素垂直排列 */
+    justify-content: center;
+    align-items: center;
+    max-width: 80%;
+    width: 100%;
+    margin: 0 auto;
+    flex-direction: column;
 }
 
 .item.item-center span {
@@ -212,22 +206,21 @@ body {
     background-color: #dadada;
     border-radius: 3px;
     user-select: none;
-    margin: 5px 0;  /* 设置上下间距 */
+    margin: 5px 0;
 }
 
-
 .avatar img {
-    width: 35px;  /* 缩小头像 */
+    width: 35px;
     height: 35px;
     border-radius: 5px;
 }
-.SendFriendVerification a{
+
+.SendFriendVerification a {
     text-decoration: none;
 }
 
 .inp__bottom {
     height: 60px;
-    /* border-top: 3px solid #eff1f1; */
     display: flex;
     align-items: center;
     padding: 0 10px;
@@ -236,7 +229,7 @@ body {
 
 .inp__bottom input {
     flex: 1;
-    height: 35px;  /* 修改输入框高度 */
+    height: 35px;
     border: 1px solid #ddd;
     border-radius: 5px;
     padding: 0 10px;
@@ -246,109 +239,78 @@ body {
 .inp__bottom button {
     margin-left: 10px;
     padding: 0 15px;
-    height: 35px;  /* 修改按钮高度 */
+    height: 35px;
     background-color: #07c160;
     color: #ffffff;
     border: none;
     border-radius: 5px;
     cursor: pointer;
 }
+    </style>
 
-</style>
+    <script>
+        // 首次发送标志 / First-send flag
+        let flag = 0;
 
-<script>
-//首次发送
-    let flag = 0;
+        // 获取当前时间，更新消息时间戳 / Update message timestamps to current time
+        const now = new Date();
 
-//替换昨天 12:30为现在的时间
-    // 获取当前时间
-    const now = new Date();
-    
+        const hours = String(now.getHours()).padStart(2, '0');
+        const minutes = String(now.getMinutes()).padStart(2, '0');
+        const formattedTime__now = `${hours}:${minutes}`;
+        document.getElementById('time-item').querySelector('span').textContent = formattedTime__now;
 
+        // 将"昨天 12:15"替换为当前时间减20分钟 / Set earlier timestamp to 20 minutes ago
+        now.setMinutes(now.getMinutes() - 20);
+        const hours__before = String(now.getHours()).padStart(2, '0');
+        const minutes__before = String(now.getMinutes()).padStart(2, '0');
+        const formattedTime__before = `${hours__before}:${minutes__before}`;
+        document.getElementById('time-before').querySelector('span').textContent = formattedTime__before;
 
-    // 格式化时间，格式为“昨天 HH:MM”
-    const hours = String(now.getHours()).padStart(2, '0');
-    const minutes = String(now.getMinutes()).padStart(2, '0');
-    const formattedTime__now = ` ${hours}:${minutes}`;
+        // 获取输入框 / Get input element
+        const input = document.querySelector(".inp__bottom input");
+        input.focus();
 
-    // 将格式化后的时间插入到HTML中
-    document.getElementById('time-item').querySelector('span').textContent = formattedTime__now;
+        // 发送消息函数 / Send message function
+        function send(event) {
+            event.preventDefault();
 
-//替换昨天 12:10为现在的时间
+            const content = input.value.trim();
+            if (!content) {
+                alert("请输入内容 / Please enter a message");
+                return;
+            }
 
-    // const now = new Date();
+            // 创建带红色感叹号的消息气泡（被拉黑效果）
+            // Create message bubble with red warning icon (blocked effect)
+            let item = document.createElement('div');
+            item.className = 'item item-right';
+            item.innerHTML = `<div class="warning"><img src="./images/warning mark.png" /></div> <div class="bubble bubble-right">${content}</div><div class="avatar"><img src="./images/head2.jpg" /></div>`;
+            document.querySelector('.content').appendChild(item);
 
-    // 减去20分钟
-    now.setMinutes(now.getMinutes() - 20);
+            // 首次发送：触发好友验证提示 + 延迟显示回应图片
+            // First send: show friend-verification notice + delayed reply image
+            if (flag === 0) {
+                let WarningPart = document.createElement('div');
+                WarningPart.className = 'WarningPart';
+                WarningPart.innerHTML = `<div class="item item-center SendFriendVerification"><span id="Warning__block">川. 开启了朋友验证，你还不是他（她）的朋友。请先发送朋友验证请求，对方验证通过后才能聊天。<a href="" class="SendFriendVerification__a">发送朋友验证</a></span></div>`;
+                document.querySelector('.content').appendChild(WarningPart);
 
+                setTimeout(() => {
+                    let content3 = document.createElement('div');
+                    content3.className = 'item item-right';
+                    content3.innerHTML = `<div class="warning"><img src="./images/warning mark.png" /></div> <div class="warning"><img class="chat__img3" src="./images/img3.png" /></div> <div class="avatar"><img src="./images/head2.jpg" /></div>`;
+                    document.querySelector('.content').appendChild(content3);
+                    document.querySelector(".content").scrollTop = document.querySelector('.content').scrollHeight;
+                }, 1750);
 
-    // 格式化时间，格式为“昨天 HH:MM”
-    const hours__before = String(now.getHours()).padStart(2, '0');
-    const minutes__before = String(now.getMinutes()).padStart(2, '0');
-    const formattedTime__before = ` ${hours__before}:${minutes__before}`;
+                flag = 1;
+            }
 
-    // 将格式化后的时间插入到HTML中
-    // document.getElementById('time-before').querySelector('span').textContent = formattedTime__before;
-
-
-    
-    
-// 获取输入框和消息列表
-const input = document.querySelector(".inp__bottom input");
-const messageList = document.querySelector(".container"); 
-
-// 发送消息后自动将焦点设置到输入框
-input.focus();
-
-// 创建发送消息函数
-function send(event) {
-    event.preventDefault();
-
-    // 判断输入框内容是否为空
-    const content = input.value.trim();
-    if (!content) {
-        alert("请输入内容");
-        return;
-    }
-
-    // 创建消息项
-    let item = document.createElement('div');
-    item.className = 'item item-right';
-
-    // 用innerHTML设置div的内容，内容为一个类名为bubble bubble-right包含格式化文本的div，一个类名为avatar包含img的div
-    item.innerHTML = `<div class="warning"><img src="./images/warning mark.png" /></div> <div class="bubble bubble-right">${content}</div><div class="avatar"><img src="./images/head2.jpg" /></div> `;
-    
-    // 把item添加到content中
-    document.querySelector('.content').appendChild(item);
-
-    //首次发送追加提示语
-        if (flag == 0) {
-        let WarningPart = document.createElement('div');
-        WarningPart.className = 'WarningPart';
-        WarningPart.innerHTML = `<div class="item item-center SendFriendVerification"><span id="Warning__block">川.开启了朋友验证，你还不是他（她）的朋友。请先发送朋友验证请求，对方请求通过后，才能聊天。<a href="" class = "SendFriendVerification__a">发送朋友验证</a></span></div> `;
-        document.querySelector('.content').appendChild(WarningPart);   
-        setTimeout(() => {
-            let content3 = document.createElement('div');
-            content3.className = 'item item-right';
-            content3.innerHTML = `<div class="warning"><img src="./images/warning mark.png" /></div> <div class="warning"><img class=" chat__img3" src="./images/img3.png" /></div> <div class="avatar"><img src="./images/head2.jpg" /></div> `;
-            document.querySelector('.content').appendChild(content3);
-            // 获取content元素内容高度，命名为height
-            let height = document.querySelector('.content').scrollHeight;
-            //选中content元素，设置scrollTop属性为height
-            document.querySelector(".content").scrollTop = height;
-        }, 2000);
-        
-        flag = 1;
-        
-    }
-
-    // 清空输入框并滚动到底部
-    input.value = "";
-    // 获取content元素内容高度，命名为height
-    let height = document.querySelector('.content').scrollHeight;
-    //选中content元素，设置scrollTop属性为height
-    document.querySelector(".content").scrollTop = height;
-}
+            // 清空输入框，滚动到底部 / Clear input and scroll to bottom
+            input.value = "";
+            document.querySelector(".content").scrollTop = document.querySelector('.content').scrollHeight;
+        }
     </script>
 </body>
 </html>
