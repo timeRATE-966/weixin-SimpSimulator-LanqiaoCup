@@ -170,8 +170,8 @@ This project is licensed under the [MIT License](./LICENSE).
 
 <div align="center">
 
-*📝 本 README 由 [Claw](https://claw.ai) AI 辅助生成，内容经作者审阅确认。*  
-*📝 This README was generated with assistance from [Claw](https://claw.ai) AI and reviewed by the author.*
+*📝 本 README 由 [Claw](https://github.com/openclaw/openclaw) AI 辅助生成，内容经作者审阅确认。*  
+*📝 This README was generated with assistance from [Claw](https://github.com/openclaw/openclaw) AI and reviewed by the author.*
 
 <br/>
 
