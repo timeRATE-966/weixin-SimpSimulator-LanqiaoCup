@@ -20,8 +20,9 @@
         <!-- 消息列表 / Message List -->
         <div class="container">
             <div class="content">
-                <!-- [FIX 2026-03-14] 移除静态 time-before（昨天 12:15），时间标签改为发送消息时由 JS 动态插入。
-                     [FIX 2026-03-14] Removed static time-before div; time label now injected by JS on first send. -->
+                <!-- [FIX 2026-03-14] time-before：页面加载时显示的固定历史时间标签 -->
+                <!-- [FIX 2026-03-14] time-before: static historical timestamp shown on page load -->
+                <div class="item item-center" id="time-before"><span>昨天 12:15</span></div>
                 <div class="item item-center"><span>我拍了拍"女神小美(3.27)"的头说你是笨狗</span></div>
                 <div class="item item-right"><div class="chat__img bubble-right"><img class="chat__img1" src="./images/img1.png" alt=""></div><div class="avatar"><img src="./images/head2.jpg" /></div></div>
                 <div class="item item-right"><div class="bubble bubble-right">要不要一起打王者</div><div class="avatar"><img src="./images/head2.jpg" /></div></div>
@@ -256,15 +257,20 @@ body {
         // 首次发送标志 / First-send flag
         let flag = 0;
 
-        // [FIX 2026-03-14] 防御性清理：页面加载时强制移除所有时间标签残留（兼容旧缓存）。
-        // 无论浏览器缓存了哪个旧版本，time-before 和 time-item 都会在 JS 执行时被立刻清除，
-        // 确保"由始至终只出现一个"——即首次发送后才动态插入 time-item。
-        // [FIX 2026-03-14] Defensive cleanup: forcibly remove any timestamp divs on page load
-        // to handle stale browser cache. Both time-before and time-item are wiped immediately,
-        // guaranteeing only one timestamp ever exists — injected dynamically on first send.
-        (function clearStaleTimestamps() {
-            var stale = document.querySelectorAll('#time-before, #time-item');
-            stale.forEach(function(el) { el.parentNode && el.parentNode.removeChild(el); });
+        // [FIX 2026-03-14] 逻辑说明：
+        // - time-before（昨天 12:15）：静态 HTML，页面加载时即显示，代表历史消息时间
+        // - time-item（当前 HH:mm）：首次发送时由 JS 动态插入，代表本次发送时刻
+        // - 两者出现时机不同，不会同时存在于初始状态
+        // [FIX 2026-03-14] Logic:
+        // - time-before ("昨天 12:15"): static HTML, visible on load, marks historical message time
+        // - time-item (current HH:mm): injected by JS on first send, marks current send time
+        // - Different trigger points; they never co-exist in the initial state
+
+        // 防御性清理：移除可能由旧缓存遗留的 time-item（time-before 保留）
+        // Defensive cleanup: remove any stale time-item left by old cache (keep time-before)
+        (function clearStaleTimeItem() {
+            var stale = document.getElementById('time-item');
+            if (stale) stale.parentNode.removeChild(stale);
         })();
 
         // 获取输入框 / Get input element
