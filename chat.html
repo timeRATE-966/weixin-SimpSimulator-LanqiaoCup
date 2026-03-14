@@ -3,6 +3,11 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- [FIX 2026-03-14] 禁止浏览器/CDN 缓存，确保每次加载到最新版本 -->
+    <!-- [FIX 2026-03-14] Disable browser/CDN cache to always serve the latest version -->
+    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+    <meta http-equiv="Pragma" content="no-cache">
+    <meta http-equiv="Expires" content="0">
     <title>舔狗模拟器 · SimpSimulator</title>
 </head>
 <body>
@@ -251,10 +256,16 @@ body {
         // 首次发送标志 / First-send flag
         let flag = 0;
 
-        // [FIX 2026-03-14] time-before 已从静态 HTML 移除，time-item 改为首次发送时动态插入，
-        // 显示当前时间（HH:mm），页面加载时不显示任何时间标签。
-        // [FIX 2026-03-14] time-before removed from HTML; time-item now injected on first send
-        // showing current HH:mm. No timestamp is shown on initial page load.
+        // [FIX 2026-03-14] 防御性清理：页面加载时强制移除所有时间标签残留（兼容旧缓存）。
+        // 无论浏览器缓存了哪个旧版本，time-before 和 time-item 都会在 JS 执行时被立刻清除，
+        // 确保"由始至终只出现一个"——即首次发送后才动态插入 time-item。
+        // [FIX 2026-03-14] Defensive cleanup: forcibly remove any timestamp divs on page load
+        // to handle stale browser cache. Both time-before and time-item are wiped immediately,
+        // guaranteeing only one timestamp ever exists — injected dynamically on first send.
+        (function clearStaleTimestamps() {
+            var stale = document.querySelectorAll('#time-before, #time-item');
+            stale.forEach(function(el) { el.parentNode && el.parentNode.removeChild(el); });
+        })();
 
         // 获取输入框 / Get input element
         const input = document.querySelector(".inp__bottom input");
