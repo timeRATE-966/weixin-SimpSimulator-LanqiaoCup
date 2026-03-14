@@ -13,8 +13,11 @@
 [![License: MIT](https://img.shields.io/badge/License-MIT-green?style=flat-square)](./LICENSE)
 [![WeChat Style](https://img.shields.io/badge/Style-WeChat-07C160?style=flat-square&logo=wechat&logoColor=white)](https://github.com/timeRATE-966/weixin-SimpSimulator-LanqiaoCup)
 [![Lanqiao Cup](https://img.shields.io/badge/Contest-蓝桥杯-blue?style=flat-square)](https://www.lanqiao.cn/)
+[![GitHub Pages](https://img.shields.io/badge/Live%20Demo-GitHub%20Pages-222?style=flat-square&logo=github)](https://timerate-966.github.io/weixin-SimpSimulator-LanqiaoCup/)
 
 </div>
+
+**🌐 在线演示 · Live Demo：[https://timerate-966.github.io/weixin-SimpSimulator-LanqiaoCup/](https://timerate-966.github.io/weixin-SimpSimulator-LanqiaoCup/)**
 
 ---
 
@@ -52,6 +55,9 @@ You play the simp, sending messages to your crush "Goddess Xiaomei" — but ever
 
 ## 🚀 快速启动 · Quick Start
 
+> 💡 **无需任何配置，直接在线体验** → [timerate-966.github.io/weixin-SimpSimulator-LanqiaoCup](https://timerate-966.github.io/weixin-SimpSimulator-LanqiaoCup/)  
+> *No setup needed — just click the link above to try it live.*
+
 ### 方式一：直接打开（推荐）· Option A: Open directly (recommended)
 
 ```bash
@@ -87,6 +93,7 @@ node server.js
 
 ```
 weixin-SimpSimulator-LanqiaoCup/
+├── index.html                   # 🔀 GitHub Pages 入口（重定向至 chat.html）/ Pages entry redirect
 ├── chat.html                    # 🌟 主界面（v1.3 最终版）/ Main page (v1.3 final)
 ├── server.js                    # Express 静态文件服务器 / Express static server
 ├── package.json                 # 项目依赖 / Project dependencies
