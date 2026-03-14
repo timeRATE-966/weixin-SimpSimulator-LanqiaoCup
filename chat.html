@@ -20,9 +20,9 @@
         <!-- 消息列表 / Message List -->
         <div class="container">
             <div class="content">
-                <!-- [FIX 2026-03-14] time-before：页面加载时显示的固定历史时间标签 -->
-                <!-- [FIX 2026-03-14] time-before: static historical timestamp shown on page load -->
-                <div class="item item-center" id="time-before"><span>昨天 12:15</span></div>
+                <!-- [FIX 2026-03-14] time-item：页面加载时由 JS 写入（当前时间 -2 分钟） -->
+                <!-- [FIX 2026-03-14] time-item: injected by JS on page load (current time minus 2 min) -->
+                <div class="item item-center" id="time-item"><span id="time-item-text"></span></div>
                 <div class="item item-center"><span>我拍了拍"女神小美(3.27)"的头说你是笨狗</span></div>
                 <div class="item item-right"><div class="chat__img bubble-right"><img class="chat__img1" src="./images/img1.png" alt=""></div><div class="avatar"><img src="./images/head2.jpg" /></div></div>
                 <div class="item item-right"><div class="bubble bubble-right">要不要一起打王者</div><div class="avatar"><img src="./images/head2.jpg" /></div></div>
@@ -257,20 +257,13 @@ body {
         // 首次发送标志 / First-send flag
         let flag = 0;
 
-        // [FIX 2026-03-14] 逻辑说明：
-        // - time-before（昨天 12:15）：静态 HTML，页面加载时即显示，代表历史消息时间
-        // - time-item（当前 HH:mm）：首次发送时由 JS 动态插入，代表本次发送时刻
-        // - 两者出现时机不同，不会同时存在于初始状态
-        // [FIX 2026-03-14] Logic:
-        // - time-before ("昨天 12:15"): static HTML, visible on load, marks historical message time
-        // - time-item (current HH:mm): injected by JS on first send, marks current send time
-        // - Different trigger points; they never co-exist in the initial state
-
-        // 防御性清理：移除可能由旧缓存遗留的 time-item（time-before 保留）
-        // Defensive cleanup: remove any stale time-item left by old cache (keep time-before)
-        (function clearStaleTimeItem() {
-            var stale = document.getElementById('time-item');
-            if (stale) stale.parentNode.removeChild(stale);
+        // [FIX 2026-03-14] 页面加载时，将 time-item 设为当前时间 -2 分钟
+        // [FIX 2026-03-14] On page load, set time-item to current time minus 2 minutes
+        (function initTimeItem() {
+            const now = new Date(Date.now() - 2 * 60 * 1000);
+            const hours = String(now.getHours()).padStart(2, '0');
+            const minutes = String(now.getMinutes()).padStart(2, '0');
+            document.getElementById('time-item-text').textContent = hours + ':' + minutes;
         })();
 
         // 获取输入框 / Get input element
@@ -285,19 +278,6 @@ body {
             if (!content) {
                 alert("请输入内容 / Please enter a message");
                 return;
-            }
-
-            // 首次发送：先插入当前时间标签，再插入消息气泡
-            // First send: inject current-time label before the message bubble
-            if (flag === 0) {
-                const now = new Date();
-                const hours = String(now.getHours()).padStart(2, '0');
-                const minutes = String(now.getMinutes()).padStart(2, '0');
-                let timeItem = document.createElement('div');
-                timeItem.className = 'item item-center';
-                timeItem.id = 'time-item';
-                timeItem.innerHTML = `<span>${hours}:${minutes}</span>`;
-                document.querySelector('.content').appendChild(timeItem);
             }
 
             // 创建带红色感叹号的消息气泡（被拉黑效果）

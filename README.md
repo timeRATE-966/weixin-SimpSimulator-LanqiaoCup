@@ -23,39 +23,34 @@
 
 ## 📖 项目简介 · About
 
-一个仿微信聊天界面的网页小品，灵感来源于真实的互联网"舔狗"体验。  
+一个仿微信聊天界面的网页小品，灵感来源于真实的互联网"舔狗"体验。
 用户扮演"舔狗"本狗，向心仪的"女神小美"发送消息——然而无论你发什么，消息旁边都会出现一个红色感叹号。**因为，她把你拉黑了。**
 
-A tongue-in-cheek WeChat chat simulator inspired by real internet "simp" culture.  
+A tongue-in-cheek WeChat chat simulator inspired by real internet "simp" culture.
 You play the simp, sending messages to your crush "Goddess Xiaomei" — but every message you send comes with a red warning icon. **Because she blocked you.**
 
-| 角色 / Role | 头像 / Avatar | 说明 / Notes |
-|:---:|:---:|:---|
-| 发送者 / Sender | 沸羊羊 🐏 | 你（舔狗本狗）/ You (the simp) |
-| 接收者 / Receiver | 美羊羊 🐑 | 女神小美 / Goddess Xiaomei |
+|    角色 / Role    | 头像 / Avatar | 说明 / Notes                   |
+| :---------------: | :-----------: | :----------------------------- |
+|  发送者 / Sender  |   沸羊羊 🐏   | 你（舔狗本狗）/ You (the simp) |
+| 接收者 / Receiver |   美羊羊 🐑   | 女神小美 / Goddess Xiaomei     |
 
 ---
 
 ## ✨ 功能特性 · Features
 
-- 🖼️ **仿微信 UI**：气泡样式、头像圆角、聊天背景图，高度还原微信风格  
-  WeChat-style chat UI with authentic bubbles, rounded avatars, and background
-- ⏰ **动态时间戳**：首次发送消息时自动插入当前时间标签（HH:mm）  
-  Dynamic timestamp injected on first send with real current time (HH:mm)
-- 💬 **预置剧情对话**：拍了拍、图片消息、文字气泡，有完整叙事  
-  Pre-set narrative: pat action, image messages, text bubbles with a full storyline
-- ⚠️ **首次发送触发好友验证提示**，并在 1.75 秒后延迟出现表情回应  
-  First message triggers friend-verification notice + delayed emoji reply after 1.75s
-- 🔴 **核心效果：被拉黑**——所有发出消息均附带红色感叹号  
-  Core mechanic: every outgoing message displays a red `!` warning icon (blocked effect)
-- ⌨️ 支持 **Enter 键**发送消息  
+- 🖼️ **仿微信 UI**：气泡样式、头像圆角、聊天背景图，高度还原微信风格WeChat-style chat UI with authentic bubbles, rounded avatars, and background
+- ⏰ **动态时间戳**：首次发送消息时自动插入当前时间标签（HH:mm）Dynamic timestamp injected on first send with real current time (HH:mm)
+- 💬 **预置剧情对话**：拍了拍、图片消息、文字气泡，有完整叙事Pre-set narrative: pat action, image messages, text bubbles with a full storyline
+- ⚠️ **首次发送触发好友验证提示**，并在 1.75 秒后延迟出现表情回应First message triggers friend-verification notice + delayed emoji reply after 1.75s
+- 🔴 **核心效果：被拉黑**——所有发出消息均附带红色感叹号Core mechanic: every outgoing message displays a red `!` warning icon (blocked effect)
+- ⌨️ 支持 **Enter 键**发送消息
   Supports sending messages via the **Enter key**
 
 ---
 
 ## 🚀 快速启动 · Quick Start
 
-> 💡 **无需任何配置，直接在线体验** → [timerate-966.github.io/weixin-SimpSimulator-LanqiaoCup](https://timerate-966.github.io/weixin-SimpSimulator-LanqiaoCup/)  
+> 💡 **无需任何配置，直接在线体验** → [timerate-966.github.io/weixin-SimpSimulator-LanqiaoCup](https://timerate-966.github.io/weixin-SimpSimulator-LanqiaoCup/)
 > *No setup needed — just click the link above to try it live.*
 
 ### 方式一：直接打开（推荐）· Option A: Open directly (recommended)
@@ -69,7 +64,7 @@ open chat.html   # macOS
 start chat.html  # Windows
 ```
 
-或直接双击 `chat.html` 即可，**无需任何依赖**。  
+或直接双击 `chat.html` 即可，**无需任何依赖**。
 Or just double-click `chat.html` — **zero dependencies required**.
 
 ### 方式二：Node.js 本地服务器 · Option B: Node.js local server
@@ -84,7 +79,7 @@ node server.js
 
 访问 / Visit → **http://localhost:10000/chat**
 
-> Windows 用户也可双击 `(双击启动)舔狗模拟器.bat` 一键启动。  
+> Windows 用户也可双击 `(双击启动)舔狗模拟器.bat` 一键启动。
 > Windows users can also double-click `(双击启动)舔狗模拟器.bat` for one-click launch.
 
 ---
@@ -120,12 +115,12 @@ weixin-SimpSimulator-LanqiaoCup/
 
 ## 🛠️ 技术栈 · Tech Stack
 
-| 技术 / Tech | 用途 / Usage |
-|:---|:---|
-| HTML5 + CSS3 | 界面结构与样式，纯手写零框架 / UI structure & styles, handcrafted, no framework |
-| Vanilla JavaScript | 消息交互逻辑，零依赖 / Message interaction logic, zero dependencies |
-| Node.js + Express | 可选本地静态文件服务器 / Optional local static file server |
-| Socket.IO | 已引入备用，暂未启用 / Included as reserve, not yet active |
+| 技术 / Tech        | 用途 / Usage                                                                    |
+| :----------------- | :------------------------------------------------------------------------------ |
+| HTML5 + CSS3       | 界面结构与样式，纯手写零框架 / UI structure & styles, handcrafted, no framework |
+| Vanilla JavaScript | 消息交互逻辑，零依赖 / Message interaction logic, zero dependencies             |
+| Node.js + Express  | 可选本地静态文件服务器 / Optional local static file server                      |
+| Socket.IO          | 已引入备用，暂未启用 / Included as reserve, not yet active                      |
 
 ---
 
@@ -133,13 +128,13 @@ weixin-SimpSimulator-LanqiaoCup/
 
 详见 [`other/CHANGELOG.md`](./other/CHANGELOG.md)
 
-| 版本 | 主要变更 |
-|:---:|:---|
+|       版本       | 主要变更                                                                                                         |
+| :---------------: | :--------------------------------------------------------------------------------------------------------------- |
 | **v1.4** ✅ | 修复 GitHub Pages 双时间戳重复问题；`time-item` 改为首次发送时动态插入；图片路径规范化；新增 GitHub Pages 支持 |
-| v1.3 | 双时间戳动态更新、预填输入框、首次发送延迟优化至 1.75s |
-| v1.2 | 完整预置对话、沸羊羊/美羊羊头像、被拉黑红色感叹号效果 |
-| v1.1 | 消息列表内嵌预置内容 |
-| v1.0 | 基础聊天 UI，纯动态消息，`prompt()` 获取用户名 |
+|       v1.3       | 双时间戳动态更新、预填输入框、首次发送延迟优化至 1.75s                                                           |
+|       v1.2       | 完整预置对话、沸羊羊/美羊羊头像、被拉黑红色感叹号效果                                                            |
+|       v1.1       | 消息列表内嵌预置内容                                                                                             |
+|       v1.0       | 基础聊天 UI，纯动态消息，`prompt()` 获取用户名                                                                 |
 
 ---
 
@@ -147,19 +142,19 @@ weixin-SimpSimulator-LanqiaoCup/
 
 `html` `css` `javascript` `wechat` `chat-ui` `weixin` `lanqiao-cup` `beginner` `frontend` `simulator` `vanilla-js`
 
-> 可在仓库页面右上角「About」→「Topics」处添加，有助于搜索发现。  
+> 可在仓库页面右上角「About」→「Topics」处添加，有助于搜索发现。
 > Add these in repo **About → Topics** to improve discoverability.
 
 ---
 
 ## 🎓 开发背景 · Background
 
-大一上学期备战**蓝桥杯 Web 赛道**时的练手作品。  
-选题源于对"舔狗文化"的观察与调侃——用一个仿微信界面把这种尴尬处境可视化。  
+大一上学期备战**蓝桥杯 Web 赛道**时的练手作品。
+选题源于对"舔狗文化"的观察与调侃——用一个仿微信界面把这种尴尬处境可视化。
 红色感叹号是整个作品的灵魂，是对"发出去的消息石沉大海"这一互联网经典体验的具象化。
 
-Built as a practice project during freshman year while preparing for the **Lanqiao Cup Web track**.  
-The concept came from observing and poking fun at "simp culture" online — visualizing that awkward situation through a WeChat-style interface.  
+Built as a practice project during freshman year while preparing for the **Lanqiao Cup Web track**.
+The concept came from observing and poking fun at "simp culture" online — visualizing that awkward situation through a WeChat-style interface.
 The red warning icon is the soul of the piece — a tangible representation of the classic internet experience: messages sent into the void.
 
 ---
@@ -172,8 +167,8 @@ This project is licensed under the [MIT License](./LICENSE).
 
 <div align="center">
 
-*📝 本 README 由 [Claw](https://github.com/openclaw/openclaw) AI 辅助生成，内容经作者审阅确认。*  
-*📝 This README was generated with assistance from [Claw](https://github.com/openclaw/openclaw) AI and reviewed by the author.*
+*📝 本 README 由 [Claw](https://github.com/openclaw/openclaw) AI 辅助生成。*
+*📝 This README was generated with assistance from [Claw](https://github.com/openclaw/openclaw) AI .*
 
 <br/>
 
