@@ -106,7 +106,7 @@ weixin-SimpSimulator-LanqiaoCup/
 │   ├── img1.png                 # 预置图片消息 1 / Pre-set image message 1
 │   ├── img2.jpg                 # 预置图片消息 2 / Pre-set image message 2
 │   ├── img3.png                 # 延迟回应贴图 / Delayed sticker reply
-│   └── warning mark.png         # 🔴 红色感叹号 / Red warning icon
+│   └── warning-mark.png         # 🔴 红色感叹号 / Red warning icon
 └── other/
     ├── CHANGELOG.md             # 版本迭代记录 / Full version history
     ├── chat1.html               # v1.1 历史版本 / v1.1

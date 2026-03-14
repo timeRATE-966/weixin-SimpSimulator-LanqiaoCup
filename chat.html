@@ -255,16 +255,26 @@ body {
         // 获取当前时间，更新消息时间戳 / Update message timestamps to current time
         const now = new Date();
 
+        // [FIX 2026-03-14] 原逻辑：time-before 也用纯 HH:mm 格式（与 time-item 格式相同），
+        // 导致 GitHub Pages 上两个时间标签视觉上看起来重复（均为 formattedTime__now 格式）。
+        // 修复：time-item 保持今天 HH:mm，time-before 改为"昨天 HH:mm"固定值，格式上明确区分。
+        // [FIX 2026-03-14] Original: time-before also used plain HH:mm format (same as time-item),
+        // causing both timestamps to look identical on GitHub Pages (both appeared as formattedTime__now).
+        // Fix: time-item keeps today's HH:mm; time-before now shows "昨天 HH:mm" to visually distinguish.
+
+        // time-item（下方）：今天的当前时间，格式 HH:mm / today's current time
         const hours = String(now.getHours()).padStart(2, '0');
         const minutes = String(now.getMinutes()).padStart(2, '0');
         const formattedTime__now = `${hours}:${minutes}`;
         document.getElementById('time-item').querySelector('span').textContent = formattedTime__now;
 
-        // 将"昨天 12:15"替换为当前时间减20分钟 / Set earlier timestamp to 20 minutes ago
-        now.setMinutes(now.getMinutes() - 20);
-        const hours__before = String(now.getHours()).padStart(2, '0');
-        const minutes__before = String(now.getMinutes()).padStart(2, '0');
-        const formattedTime__before = `${hours__before}:${minutes__before}`;
+        // time-before（上方）：昨天 12:15，格式"昨天 HH:mm" / yesterday 12:15, format "昨天 HH:mm"
+        const yesterday = new Date(now);
+        yesterday.setDate(yesterday.getDate() - 1);
+        yesterday.setHours(12, 15, 0, 0);
+        const hours__before = String(yesterday.getHours()).padStart(2, '0');
+        const minutes__before = String(yesterday.getMinutes()).padStart(2, '0');
+        const formattedTime__before = `昨天 ${hours__before}:${minutes__before}`;
         document.getElementById('time-before').querySelector('span').textContent = formattedTime__before;
 
         // 获取输入框 / Get input element
@@ -283,9 +293,13 @@ body {
 
             // 创建带红色感叹号的消息气泡（被拉黑效果）
             // Create message bubble with red warning icon (blocked effect)
+            // [FIX 2026-03-14] 原文件名 "warning mark.png" 含空格，在 GitHub Pages URL 中可能引发
+            // 路径解析问题，规范化为 "warning-mark.png"（连字符）。
+            // [FIX 2026-03-14] Renamed from "warning mark.png" (space) to "warning-mark.png" (hyphen)
+            // to avoid potential URL path issues on GitHub Pages.
             let item = document.createElement('div');
             item.className = 'item item-right';
-            item.innerHTML = `<div class="warning"><img src="./images/warning mark.png" /></div> <div class="bubble bubble-right">${content}</div><div class="avatar"><img src="./images/head2.jpg" /></div>`;
+            item.innerHTML = `<div class="warning"><img src="./images/warning-mark.png" /></div> <div class="bubble bubble-right">${content}</div><div class="avatar"><img src="./images/head2.jpg" /></div>`;
             document.querySelector('.content').appendChild(item);
 
             // 首次发送：触发好友验证提示 + 延迟显示回应图片
@@ -299,7 +313,8 @@ body {
                 setTimeout(() => {
                     let content3 = document.createElement('div');
                     content3.className = 'item item-right';
-                    content3.innerHTML = `<div class="warning"><img src="./images/warning mark.png" /></div> <div class="warning"><img class="chat__img3" src="./images/img3.png" /></div> <div class="avatar"><img src="./images/head2.jpg" /></div>`;
+                    // [FIX 2026-03-14] 同上，warning mark.png → warning-mark.png / Same rename as above
+                    content3.innerHTML = `<div class="warning"><img src="./images/warning-mark.png" /></div> <div class="warning"><img class="chat__img3" src="./images/img3.png" /></div> <div class="avatar"><img src="./images/head2.jpg" /></div>`;
                     document.querySelector('.content').appendChild(content3);
                     document.querySelector(".content").scrollTop = document.querySelector('.content').scrollHeight;
                 }, 1750);
