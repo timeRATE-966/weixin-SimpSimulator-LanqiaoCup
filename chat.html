@@ -15,9 +15,8 @@
         <!-- 消息列表 / Message List -->
         <div class="container">
             <div class="content">
-                <div class="item item-center" id="time-before"><span>昨天 12:15</span></div>
-
-                <div class="item item-center" id="time-item"><span>昨天 12:35</span></div>
+                <!-- [FIX 2026-03-14] 移除静态 time-before（昨天 12:15），时间标签改为发送消息时由 JS 动态插入。
+                     [FIX 2026-03-14] Removed static time-before div; time label now injected by JS on first send. -->
                 <div class="item item-center"><span>我拍了拍"女神小美(3.27)"的头说你是笨狗</span></div>
                 <div class="item item-right"><div class="chat__img bubble-right"><img class="chat__img1" src="./images/img1.png" alt=""></div><div class="avatar"><img src="./images/head2.jpg" /></div></div>
                 <div class="item item-right"><div class="bubble bubble-right">要不要一起打王者</div><div class="avatar"><img src="./images/head2.jpg" /></div></div>
@@ -252,30 +251,10 @@ body {
         // 首次发送标志 / First-send flag
         let flag = 0;
 
-        // 获取当前时间，更新消息时间戳 / Update message timestamps to current time
-        const now = new Date();
-
-        // [FIX 2026-03-14] 原逻辑：time-before 也用纯 HH:mm 格式（与 time-item 格式相同），
-        // 导致 GitHub Pages 上两个时间标签视觉上看起来重复（均为 formattedTime__now 格式）。
-        // 修复：time-item 保持今天 HH:mm，time-before 改为"昨天 HH:mm"固定值，格式上明确区分。
-        // [FIX 2026-03-14] Original: time-before also used plain HH:mm format (same as time-item),
-        // causing both timestamps to look identical on GitHub Pages (both appeared as formattedTime__now).
-        // Fix: time-item keeps today's HH:mm; time-before now shows "昨天 HH:mm" to visually distinguish.
-
-        // time-item（下方）：今天的当前时间，格式 HH:mm / today's current time
-        const hours = String(now.getHours()).padStart(2, '0');
-        const minutes = String(now.getMinutes()).padStart(2, '0');
-        const formattedTime__now = `${hours}:${minutes}`;
-        document.getElementById('time-item').querySelector('span').textContent = formattedTime__now;
-
-        // time-before（上方）：昨天 12:15，格式"昨天 HH:mm" / yesterday 12:15, format "昨天 HH:mm"
-        const yesterday = new Date(now);
-        yesterday.setDate(yesterday.getDate() - 1);
-        yesterday.setHours(12, 15, 0, 0);
-        const hours__before = String(yesterday.getHours()).padStart(2, '0');
-        const minutes__before = String(yesterday.getMinutes()).padStart(2, '0');
-        const formattedTime__before = `昨天 ${hours__before}:${minutes__before}`;
-        document.getElementById('time-before').querySelector('span').textContent = formattedTime__before;
+        // [FIX 2026-03-14] time-before 已从静态 HTML 移除，time-item 改为首次发送时动态插入，
+        // 显示当前时间（HH:mm），页面加载时不显示任何时间标签。
+        // [FIX 2026-03-14] time-before removed from HTML; time-item now injected on first send
+        // showing current HH:mm. No timestamp is shown on initial page load.
 
         // 获取输入框 / Get input element
         const input = document.querySelector(".inp__bottom input");
@@ -291,12 +270,21 @@ body {
                 return;
             }
 
+            // 首次发送：先插入当前时间标签，再插入消息气泡
+            // First send: inject current-time label before the message bubble
+            if (flag === 0) {
+                const now = new Date();
+                const hours = String(now.getHours()).padStart(2, '0');
+                const minutes = String(now.getMinutes()).padStart(2, '0');
+                let timeItem = document.createElement('div');
+                timeItem.className = 'item item-center';
+                timeItem.id = 'time-item';
+                timeItem.innerHTML = `<span>${hours}:${minutes}</span>`;
+                document.querySelector('.content').appendChild(timeItem);
+            }
+
             // 创建带红色感叹号的消息气泡（被拉黑效果）
             // Create message bubble with red warning icon (blocked effect)
-            // [FIX 2026-03-14] 原文件名 "warning mark.png" 含空格，在 GitHub Pages URL 中可能引发
-            // 路径解析问题，规范化为 "warning-mark.png"（连字符）。
-            // [FIX 2026-03-14] Renamed from "warning mark.png" (space) to "warning-mark.png" (hyphen)
-            // to avoid potential URL path issues on GitHub Pages.
             let item = document.createElement('div');
             item.className = 'item item-right';
             item.innerHTML = `<div class="warning"><img src="./images/warning-mark.png" /></div> <div class="bubble bubble-right">${content}</div><div class="avatar"><img src="./images/head2.jpg" /></div>`;
